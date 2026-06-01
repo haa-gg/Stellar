@@ -4,7 +4,8 @@
   "description": "AES-256 password-protected static site for GitHub Pages",
   "main": "encrypt.js",
   "scripts": {
-    "build": "node encrypt.js"
+    "build": "node encrypt.js",
+    "dev": "node watch.js"
   },
   "dependencies": {
     "crypto-js": "^4.2.0"
