@@ -1,0 +1,12 @@
+{
+  "name": "stellar-protected-site",
+  "version": "1.0.0",
+  "description": "AES-256 password-protected static site for GitHub Pages",
+  "main": "encrypt.js",
+  "scripts": {
+    "build": "node encrypt.js"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  }
+}
