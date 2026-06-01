@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Space — Decrypted Workspace</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,200;0,300;0,400;0,600;0,800;1,400&family=Outfit:wght@200;300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fafbfc;
+            color: #1e293b;
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Awwwards-style thin structural grid lines */
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            justify-content: space-around;
+            z-index: 0;
+        }
+
+        .grid-line {
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.02) 0%, rgba(15, 23, 42, 0.04) 50%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        /* Glowing ambient light background */
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, rgba(6, 182, 212, 0.03) 50%, rgba(0, 0, 0, 0) 100%);
+            filter: blur(80px);
+            z-index: 0;
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        /* Top Header Navigation */
+        header {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #0f172a 0%, #4f46e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #047857;
+            font-weight: 500;
+            background: rgba(4, 120, 87, 0.05);
+            padding: 0.4rem 1rem;
+            border: 1px solid rgba(4, 120, 87, 0.15);
+            border-radius: 100px;
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #047857;
+            border-radius: 50%;
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.3);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+        }
+
+        /* Main Showcase Area */
+        main {
+            position: relative;
+            z-index: 10;
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 3rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Left Side: Dramatic Typography Hero */
+        .hero-section {
+            text-align: left;
+        }
+
+        .category-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #4f46e5;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        h1 {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: clamp(3.2rem, 5.5vw, 5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 0.35em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-top: 0.75rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #475569;
+            font-weight: 300;
+            max-width: 540px;
+            margin-bottom: 3rem;
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.25rem 2.5rem;
+            border: 1px solid rgba(15, 23, 42, 0.15);
+            border-radius: 100px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #0f172a;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1);
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+
+        .action-button:hover {
+            color: #0f172a;
+            border-color: #0f172a;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.15);
+        }
+
+        .action-button:hover::before {
+            transform: translateY(0);
+        }
+
+        /* Right Side: Interactive Minimal Cards */
+        .workspace-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.005);
+            border: 1px solid rgba(15, 23, 42, 0.05);
+            padding: 2.25rem;
+            border-radius: 16px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(15, 23, 42, 0.02);
+            border-color: rgba(15, 23, 42, 0.12);
+            transform: translateX(10px);
+        }
+
+        .glass-card:hover::after {
+            width: 100%;
+        }
+
+        .card-details {
+            max-width: 80%;
+        }
+
+        .card-meta {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #4f46e5;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .card-title {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #475569;
+            font-weight: 300;
+        }
+
+        .arrow-icon {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+
+        .glass-card:hover .arrow-icon {
+            transform: translateX(5px) scale(1.1);
+            color: #0f172a;
+        }
+
+        /* Bottom Footer Marquee/Ticker */
+        footer {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            border-top: 1px solid rgba(15, 23, 42, 0.05);
+            background-color: #0f172a;
+            padding: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .marquee-wrapper {
+            display: flex;
+            width: 200%;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-content {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Grid System Lines -->
+    <div class="grid-lines">
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+    </div>
+
+    <div class="ambient-glow"></div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo">GET STELLAR DIGITAL</div>
+        <div class="status-badge">
+            <div class="pulse-dot"></div>
+            Decryption Complete
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Left Hero Panel -->
+        <div class="hero-section">
+            <div class="category-tag">Secure Space</div>
+            <h1>GET STELLAR DIGITAL<span>Private Workspace / Vol. 01</span></h1>
+            <p class="hero-desc">
+                This is where the website will go once we cook on some styling direction!
+            </p>
+            <a href="#" class="action-button">
+                This button goes nowhere &rarr;
+            </a>
+        </div>
+
+        <!-- Right Minimalist Cards -->
+        <div class="workspace-grid">
+            <div class="glass-card">
+                <div class="card-details">
+                    <div class="card-meta">Index — 01</div>
+                    <div class="card-title">Encrypted Storage</div>
+                    <div class="card-desc">Your raw website files and templates are secure from public git indexing and
+                        search bots.</div>
+                </div>
+                <div class="arrow-icon">&rarr;</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-details">
+                    <div class="card-meta">Index — 02</div>
+                    <div class="card-title">AES-256 Standard</div>
+                    <div class="card-desc">All public contents are dynamically decrypted locally inside the browser
+                        using industry standards.</div>
+                </div>
+                <div class="arrow-icon">&rarr;</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-details">
+                    <div class="card-meta">Index — 03</div>
+                    <div class="card-title">Awwwards Light</div>
+                    <div class="card-desc">Designed with crisp structural lines, clean Inter Tight headings, and premium
+                        light theme details.</div>
+                </div>
+                <div class="arrow-icon">&rarr;</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Ticker -->
+    <footer>
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span>STELLAR SPACE // SECURED ACCESS // AES-256 DECRYPTED</span>
+                <span>AUTHENTICATION GRANTED // STATIC ARCHITECTURE</span>
+                <span>NO SERVER OVERHEAD // ENHANCED PRIVACY</span>
+            </div>
+            <div class="marquee-content">
+                <span>STELLAR SPACE // SECURED ACCESS // AES-256 DECRYPTED</span>
+                <span>AUTHENTICATION GRANTED // STATIC ARCHITECTURE</span>
+                <span>NO SERVER OVERHEAD // ENHANCED PRIVACY</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
