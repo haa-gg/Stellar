@@ -14,7 +14,10 @@ if (!fs.existsSync(srcPath)) {
 }
 
 // Read the unencrypted source code
-const htmlContent = fs.readFileSync(srcPath, 'utf8');
+let htmlContent = fs.readFileSync(srcPath, 'utf8');
+
+// Fix relative image paths for production build (since built index.html is in root)
+htmlContent = htmlContent.replace(/\.\/images\//g, 'src/images/');
 
 // Encrypt the source code using AES-256
 const encrypted = CryptoJS.AES.encrypt(htmlContent, PASSWORD).toString();

@@ -58,7 +58,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: url('src/images/bg-1.jpg') center/cover no-repeat;
+            background: url('./images/bg-1.jpg') center/cover no-repeat;
             z-index: -1;
             pointer-events: none;
 
@@ -98,7 +98,6 @@
             align-items: center;
             padding: 40px 8vw;
             z-index: 100;
-            mix-blend-mode: difference;
         }
 
         .logo {
@@ -109,11 +108,13 @@
             text-transform: uppercase;
             text-decoration: none;
             color: var(--text-color);
+            mix-blend-mode: difference;
         }
 
         nav {
             display: flex;
             gap: 40px;
+            mix-blend-mode: difference;
         }
 
         nav a {
@@ -285,18 +286,18 @@
         }
 
         .card-image {
-            flex: 0 0 45%;
-            height: 600px;
+            flex: 0 0 35%;
+            height: 500px;
             position: relative;
             overflow: hidden;
         }
 
         .parallax-inner {
             position: absolute;
-            top: -10%;
+            top: -40%;
             left: -10%;
             right: -10%;
-            bottom: -10%;
+            bottom: -40%;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -375,26 +376,190 @@
             transform: translateY(-50%);
             width: 66vw;
             height: 60vh;
-            background: url('src/images/mountains-web.jpg') center/cover no-repeat;
+            background: url('./images/mountains-web.jpg') center/cover no-repeat;
             z-index: -1;
             opacity: 0.5;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
             will-change: transform;
         }
 
+        /* Footer */
+        footer {
+            padding: 80px 8vw 40px;
+            background-color: rgba(15, 15, 15, 0.9);
+            border-top: 1px solid rgba(247, 248, 244, 0.1);
+            margin-top: 120px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+        }
+
+        footer .logo {
+            mix-blend-mode: normal;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 15px;
+            font-size: 14px;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(247, 248, 244, 0.05);
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 101;
+            mix-blend-mode: difference;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
         @media (max-width: 1024px) {
             .services-grid {
                 grid-template-columns: 1fr;
-                gap: 60px;
+                gap: 80px;
+            }
+
+            .service-card-seo,
+            .service-card-web {
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
+
+            .service-card-seo .content-wrapper,
+            .service-card-web .content-wrapper {
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .card-image {
+                width: 100%;
+                height: 400px;
+                flex: none;
+            }
+
+            .parallax-inner {
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                transform: none !important;
+            }
+
+            .hero-sub {
+                letter-spacing: inherit;
             }
 
             .hero h1 {
                 font-size: clamp(50px, 12vw, 90px);
             }
 
+            .hero h1 span {
+                font-size: clamp(50px, 14vw, 90px);
+            }
+
+            header {
+                padding: 30px 5vw;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
             nav {
-                display: none;
-                /* Hide for mobile sample */
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(20, 20, 20, 0.90);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                z-index: 100;
+                mix-blend-mode: normal;
+            }
+
+            nav.open {
+                right: 0;
+            }
+
+            nav a {
+                font-size: 20px;
+            }
+
+            .hero-image-bg {
+                width: 90vw;
+                right: 5%;
+                opacity: 0.2;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
             }
         }
     </style>
@@ -405,6 +570,11 @@
 
     <header>
         <a href="#" class="logo">Stellar.</a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav>
             <a href="#">Home</a>
             <a href="#">SEO</a>
@@ -429,7 +599,8 @@
                 <div class="services-grid">
                     <div class="service-card service-card-seo">
                         <div class="card-image">
-                            <div class="parallax-inner" style="background-image: url('src/images/flowers-web.jpg');"></div>
+                            <div class="parallax-inner" style="background-image: url('./images/flowers-web.jpg');">
+                            </div>
                         </div>
                         <div class="content-wrapper">
                             <h2>SEO<br>Strategy</h2>
@@ -441,7 +612,7 @@
                     </div>
                     <div class="service-card service-card-web">
                         <div class="card-image">
-                            <div class="parallax-inner" style="background-image: url('src/images/barbershop-web.jpg');">
+                            <div class="parallax-inner" style="background-image: url('./images/barbershop-web.jpg');">
                             </div>
                         </div>
                         <div class="content-wrapper">
@@ -457,27 +628,58 @@
         </section>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroImage = document.querySelector('.hero-image-bg');
-            const parallaxInners = document.querySelectorAll('.parallax-inner');
-            const updateParallax = () => {
-                const scrolled = window.scrollY;
-                if (heroImage) {
-                    heroImage.style.transform = `translateY(calc(-50% + ${scrolled * 0.3}px))`;
-                }
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">Stellar.</a>
+                <p>Digital experiences that knock your socks off. We build fast, beautiful, and secure spaces on the web.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">SEO</a>
+                <a href="#">Web Design</a>
+                <a href="#">Connect</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Stellar Digital. All rights reserved.</p>
+        </div>
+    </footer>
 
-                parallaxInners.forEach(inner => {
-                    const rect = inner.parentElement.getBoundingClientRect();
-                    const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-                    const clamped = Math.max(0, Math.min(1, scrollProgress));
-                    // More noticeable parallax effect (moves from +100px to -100px)
-                    const yOffset = (0.5 - clamped) * 200;
-                    inner.style.transform = `translateY(${yOffset}px)`;
-                });
-            };
-            window.addEventListener('scroll', updateParallax);
-            updateParallax(); // Initial call on load
+    <script>
+        const heroImage = document.querySelector('.hero-image-bg');
+        const parallaxInners = document.querySelectorAll('.parallax-inner');
+        const updateParallax = () => {
+            const scrolled = window.scrollY;
+            if (heroImage) {
+                heroImage.style.transform = `translateY(calc(-50% + ${scrolled * 0.3}px))`;
+            }
+
+            parallaxInners.forEach(inner => {
+                const rect = inner.parentElement.getBoundingClientRect();
+                const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                const clamped = Math.max(0, Math.min(1, scrollProgress));
+                // More noticeable parallax effect (moves from +300px to -300px)
+                const yOffset = (0.5 - clamped) * 600;
+                inner.style.transform = `translateY(${yOffset}px) scale(1.05)`;
+            });
+        };
+        window.addEventListener('scroll', updateParallax);
+        updateParallax(); // Initial call on load
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('open');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('open');
+            });
         });
     </script>
 </body>
